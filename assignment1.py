@@ -134,9 +134,20 @@ def day_count(start_date: str, stop_date: str) -> int:
     return count
 
 
+import sys
+from datetime import datetime
+
 if __name__ == "__main__":
-    start_date = "2025-03-01"
-    end_date = "2025-03-30"
-    print(f"Demonstration1: {start_date} to {end_date}")
+    # Check if there are exactly 3 arguments (script name + 2 dates) and returns usage message if not.
+    if len(sys.argv) != 3:
+        print("Usage: python assignment1.py <start_date> <end_date>")
+        sys.exit(1)
+
+    start_date = sys.argv[1]
+    end_date = sys.argv[2]
+
+    # Calls the day_count function to show number of weekend days
     weekend_days = day_count(start_date, end_date)
-    print(f"Number of weekend days: {weekend_days}\n")
+
+    print(f"Number of weekend days between {start_date} and {end_date}: {weekend_days}")
+
