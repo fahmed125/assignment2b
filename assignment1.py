@@ -29,8 +29,7 @@ def day_of_week(year: int, month: int, date: int) -> str:
 
 def mon_max(month: int, year: int) -> int:
     "returns the maximum day for a given month. Includes leap year check"
-    mon_dict = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-                7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+    mon_dict = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
 
     if month == 2 and leap_year(year):
         return 29
@@ -138,14 +137,13 @@ import sys
 from datetime import datetime
 
 if __name__ == "__main__":
-    # Check if there are exactly 3 arguments (script name + 2 dates) and returns usage message if not.
     if len(sys.argv) != 3:
-        print("Usage: python assignment1.py <start_date> <end_date>")
-        sys.exit(1)
-
+        usage()
     start_date = sys.argv[1]
     end_date = sys.argv[2]
 
+if start_date>end_date:                #in case someone puts bigger/latest date first
+    start_date,end_date=end_date,start_date
     # Calls the day_count function to show number of weekend days
     weekend_days = day_count(start_date, end_date)
 
