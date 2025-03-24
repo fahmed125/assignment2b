@@ -30,11 +30,18 @@ def day_of_week(year: int, month: int, date: int) -> str:
  
  
  
-def mon_max(month:int, year:int) -> int:
-    "returns the maximum day for a given month. Includes leap year check"
-    days_in_month={ 1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
-    if month==2 and leap_year(year):
+def mon_max(month: int, year: int) -> int:
+    "Returns the maximum day for a given month. Includes leap year check"
+    mon_dict = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
+                7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+    
+    if month == 2 and leap_year(year):
         return 29
+    elif 1 <= month <= 12:
+        return mon_dict[month]
+    else:
+        return None
+
  
 def after(date: str) -> str:
     '''
@@ -96,7 +103,7 @@ def leap_year(year: int) -> bool:
         return False
  
 
-def valid_date(date: str) -> bool:
+def valid_date(date: str) ->y bool:
     "check validity of date and return True if valid"
     try:
         year= int(date[:4])
@@ -140,6 +147,19 @@ def day_count(start_date: str, stop_date: str) -> int:
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         usage()
-    
-    start_date, stop_date = sys.argv[1], sys.argv[2]
-    print(f"Number of weekend days: {day_count(start_date, stop_date)}")
+
+    start_date = sys.argv[1]
+    if not valid_date(start_date):
+        print(f"Invalid Start Date: {start_date}")
+        usage()
+
+    try:
+        num = int(sys.argv[2])
+    except ValueError:
+        print(f"Invalid number of days: {sys.argv[2]}")
+        usage()
+    end_date = day_iter(start_date, num)
+    day = day_of_week(end_date)
+
+    print(f"The end date is: {end_date} ({day})")
+
