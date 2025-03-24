@@ -133,9 +133,6 @@ def day_count(start_date: str, stop_date: str) -> int:
     return count
 
 
-import sys
-from datetime import datetime
-
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         usage()
